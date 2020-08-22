@@ -9,28 +9,28 @@ component.registerPage = `
     <div class="register_header">MindX chat</div>
     <div class="name_wrapper">
         <div class="input_wrapper">
-            <input type="text" placeholder="First name" name="firstName" autocomplete="off">
+            <input type="text" placeholder="First name" name="firstName">
             <div class="error" id="first_name_error"></div>
         </div>
         <div class="input_wrapper">
-            <input type="text" placeholder="Last name" name="lastName" autocomplete="off">
+            <input type="text" placeholder="Last name" name="lastName">
             <div class="error" id="last_name_error"></div>
         </div>
     </div>
     <div class="input_wrapper">
-        <input type="email" placeholder="Email" name="email" autocomplete="off">
+        <input type="email" placeholder="Email" name="email">
         <div class="error" id="email_error"></div>
     </div>
     <div class="input_wrapper">
-        <input type="text" placeholder="Password" name="password" autocomplete="off">
+        <input type="password" placeholder="Password" name="password" autocomplete="off">
         <div class="error" id="password_error"></div>
     </div>
     <div class="input_wrapper">
-        <input type="text" placeholder="Confirm password" name="confirmPassword" autocomplete="off">
+        <input type="password" placeholder="Confirm password" name="confirmPassword" autocomplete="off">
         <div class="error" id="confirm_password_error"></div>
     </div>
     <div class="form_action">
-        <div>Already have an account ? <span class="cursor_pointer" id="login_page">Login</span></div>
+        <div>Already have an account ? <span class="cursor_pointer" id="redirect_to_login">Login</span></div>
         <button class="btn cursor_pointer" type="submit">Register</button>
     </div>
 </form>
@@ -42,17 +42,23 @@ component.loginPage = `
         <form id="login_form">
             <div class="login_header">MindX chat</div>
             <div class="input_wrapper">
-                <input type="email" placeholder="Email" name="email" autocomplete="off">
+                <input type="email" placeholder="Email" name="email">
                 <div class="error" id="email_error"></div>
             </div>
             <div class="input_wrapper">
-                <input type="text" placeholder="Password" name="password" autocomplete="off">
+                <input type="password" placeholder="Password" name="password" autocomplete="off">
                 <div class="error" id="password_error"></div>
             </div>
             <div class="form_action">
-                <div>Don't have an account ? <span class="cursor_pointer" id="register_page">Register</span></div>
+                <div>Don't have an account ? <span class="cursor_pointer" id="redirect_to_register">Register</span></div>
                 <button class="btn cursor_pointer" type="submit">Login</button>
             </div>
         </form>
     </div>
 `
+
+component.chatPage = (user) => {return `
+    <div class="chat_container">
+        <div id="Welcome_Note">Welcome ${user}</div>
+    </div>
+`}

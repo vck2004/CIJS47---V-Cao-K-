@@ -1,27 +1,19 @@
 const controller = {}
 controller.register = (data) => {
-    if (data.firstName === '') {
-        document.getElementById('first_name_error').innerText = 'Please input firstname'
-    }
-    if (data.lastName === '') {
-        document.getElementById('last_name_error').innerText = 'Please input lastname'
-    }
-    if (data.email === '') {
-        document.getElementById('email_error').innerText = 'Please input email'
-    }
-    if (data.password === '') {
-        document.getElementById('password_error').innerText = 'Please input password'
-    }
-    if (data.confirmPassword === '') {
-        document.getElementById('confirm_password_error').innerText = 'Please input password'
+    view.setErrorMessage('first_name_error',data.firstName === '' ? 'Please input first name' : '')
+    view.setErrorMessage('last_name_error',data.lastName === '' ? 'Please input last name' : '')
+    view.setErrorMessage('email_error',data.email === '' ? 'Please input email' : '')
+    view.setErrorMessage('password_error',data.password === '' ? 'Please input password' : '')
+    view.setErrorMessage('confirm_password_error',data.confirmPassword === '' ? 'Please input confirm password' : data.confirmPassword === data.password ? '' : `Password didn't match`)
+    if(data.firstName !== '' && data.lastName !== '' && data.email !== '' && data.password !== '' && data.confirmPassword === data.password){
+        model.register(data)
     }
 }
 
 controller.login = (data) => {
-    if (data.email === '') {
-        document.getElementById('email_error').innerText = 'Please input email'
-    }
-    if (data.password === '') {
-        document.getElementById('password_error').innerText = 'Please input password'
+    view.setErrorMessage('email_error',data.email === '' ? 'Please input email' : '')
+    view.setErrorMessage('password_error',data.password === '' ? 'Please input password' : '')
+    if(data.email !== '' && data.password !== ''){
+        model.login(data)
     }
 }
