@@ -26,3 +26,6 @@
 .form_action {
     align-items: center;
 }
+.name_wrapper .input_wrapper {
+    width: 48%;
+}

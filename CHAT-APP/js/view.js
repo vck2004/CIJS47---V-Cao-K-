@@ -35,11 +35,44 @@ view.setActiveScreen = (screenName) => {
             })
             break
         case 'chatPage':
-            document.getElementById('app').innerHTML = component.chatPage(model.currentUser.displayName)
+            document.getElementById('app').innerHTML = component.chatPage
+            const sendMessageForm = document.getElementById('send_message_form')
+            sendMessageForm.addEventListener('submit', (e) => {
+                e.preventDefault()
+                if(sendMessageForm.message.value !== ''){
+                    const message = {
+                        content: sendMessageForm.message.value,
+                        owner: model.currentUser.email
+                    }
+                    const messageFromBot = {
+                        content: sendMessageForm.message.value,
+                        owner: 'Bot'
+                    }
+                    view.addMessage(message)
+                    view.addMessage(messageFromBot)
+                    sendMessageForm.message.value = ''
+                }
+            })
             break
     }
 }
 
 view.setErrorMessage = (elementId, content) => {
     document.getElementById(elementId).innerText = content
+}
+
+view.addMessage = (message) => {
+    const messageWrapper = document.createElement('div')
+    messageWrapper.classList.add('message')
+    if (message.owner === model.currentUser.email) {
+        messageWrapper.classList.add('mine')
+        messageWrapper.innerHTML = `<div class="content">${message.content}</div>`
+    } else {
+        messageWrapper.classList.add('their')
+        messageWrapper.innerHTML = `
+        <div class="owner">${message.owner}</div>
+        <div class="content">${message.content}</div>
+        `
+    }
+    document.querySelector('.list_messages').appendChild(messageWrapper)
 }

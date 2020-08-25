@@ -57,8 +57,20 @@ component.loginPage = `
     </div>
 `
 
-component.chatPage = (user) => {return `
-    <div class="chat_container">
-        <div id="Welcome_Note">Welcome ${user}</div>
+component.chatPage = `
+<div class="chat_container">
+<div class="header">MindX chat</div>
+<div class="main">
+    <div class="conversation_detail">
+        <div class="conversation_title">First conversation</div>
+        <div class="list_messages"></div>
+        <form id="send_message_form">
+            <div class="input_wrapper">
+                <input type="text" placeholder="Type a message" name="message" autocomplete="off">
+            </div>
+            <button type="submit"><i class="fa fa-paper-plane cursor_pointer" aria-hidden="true"></i></button>
+        </form>
     </div>
-`}
+</div>
+</div>
+`
