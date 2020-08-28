@@ -1,5 +1,5 @@
 const view = {}
-view.setActiveScreen = (screenName) => {
+view.setActiveScreen = async (screenName) => {
     switch (screenName) {
         case 'registerPage':
             document.getElementById('app').innerHTML = component.registerPage
@@ -36,18 +36,19 @@ view.setActiveScreen = (screenName) => {
             break
         case 'chatPage':
             document.getElementById('app').innerHTML = component.chatPage
+            view.loadConversation(await model.getFirestoreConversation())
             const sendMessageForm = document.getElementById('send_message_form')
             sendMessageForm.addEventListener('submit', (e) => {
                 e.preventDefault()
-                if(sendMessageForm.message.value !== ''){
-                    const message = {
-                        content: sendMessageForm.message.value,
-                        owner: model.currentUser.email
-                    }
-                    const messageFromBot = {
-                        content: sendMessageForm.message.value,
-                        owner: 'Bot'
-                    }
+                const message = {
+                    content: sendMessageForm.message.value,
+                    owner: model.currentUser.email
+                }
+                const messageFromBot = {
+                    content: sendMessageForm.message.value,
+                    owner: 'Bot'
+                }
+                if(sendMessageForm.message.value.trim() !== ''){
                     view.addMessage(message)
                     view.addMessage(messageFromBot)
                     sendMessageForm.message.value = ''
@@ -75,4 +76,11 @@ view.addMessage = (message) => {
         `
     }
     document.querySelector('.list_messages').appendChild(messageWrapper)
+}
+
+view.loadConversation = (data) => {
+    document.querySelector('.conversation_title').innerText = data.title
+    for(let message of data.messages){
+        view.addMessage(message)
+    }
 }

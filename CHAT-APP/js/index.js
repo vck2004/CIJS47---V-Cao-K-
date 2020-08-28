@@ -27,4 +27,51 @@ window.onload = () => {
       view.setActiveScreen('loginPage')
     }
   })
+  // templateFirestore()
+}
+
+
+
+
+
+
+
+const templateFirestore = async () => {
+  // get one
+  const docId = 'Nfj14WQ2UYU0OmqdtfTz'
+  const response = await firebase.firestore().collection('users').doc(docId).get()
+  const user = getOneDocument(response)
+  // get many
+  const responseMany = await firebase.firestore().collection('users').where('address','==','VN').get()
+  const users = getManyDocument(responseMany)
+  // create
+  const dataToCreate = {
+    age: 100,
+    name: 'ABC'
+  }
+  // firebase.firestore().collection('users').add(dataToCreate)
+  // update
+  const idToUpdate = 'RqSamIuDlSZjAU2jpfgC'
+  const dataToUpdate = {
+    name: 'Updated',
+    address: firebase.firestore.FieldValue.arrayUnion('old')
+  }
+  firebase.firestore().collection('users').doc(idToUpdate).update(dataToUpdate)
+  // delete
+  const idToDelete = 'gmStE5sDYtwbw1MhPGsn'
+  firebase.firestore().collection('users').doc(idToDelete).delete()
+}
+
+const getManyDocument = (response) => {
+  const listData = []
+  for(let doc of response.docs){
+    listData.push(getOneDocument(doc))
+  }
+  return listData
+}
+
+const getOneDocument = (response) => {
+  const data = response.data()
+  data.id = response.id
+  return data
 }

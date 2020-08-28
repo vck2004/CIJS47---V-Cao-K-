@@ -32,6 +32,8 @@
 
 .chat_container .list_messages {
     flex-grow: 1;
+    padding: 10px;
+    overflow-y: auto;
 }
 
 .chat_container #send_message_form {
@@ -40,14 +42,13 @@
 
 #send_message_form button {
     position: absolute;
-    right: 0;
+    right: 15px;
     top: 23px;
     border: none;
     color: #007cfd;
-    font-size: 23px;
-    background-color: #fff;
+    font-size: 1.5rem;
+    background: transparent;
     outline: none;
-    margin-right: 10px;
 }
 
 #send_message_form .input_wrapper {
@@ -63,6 +64,7 @@
     max-width: 45%;
     padding: 4px 8px;
     border-radius: 4px;
+    word-break: break-all;
 }
 
 .list_messages .message.mine .content {
@@ -74,10 +76,6 @@
     display: flex;
     justify-content: flex-end;
     margin-bottom: 10px;
-}
-
-.chat_container .list_messages {
-    padding: 10px;
 }
 
 .list_messages .message.their .content {

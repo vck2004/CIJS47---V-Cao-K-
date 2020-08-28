@@ -30,3 +30,10 @@ model.login = (data) => {
         console.log(err)
     }
 }
+
+model.getFirestoreConversation = async () => {
+    const docId = 'fJzYDPfRARBjfzfUkGBh'
+    const response = await firebase.firestore().collection('conversations').doc(docId).get()
+    const conversation = getOneDocument(response)
+    return conversation
+}
